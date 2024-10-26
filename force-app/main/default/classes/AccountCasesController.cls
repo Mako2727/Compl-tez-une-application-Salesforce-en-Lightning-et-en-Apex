@@ -1,9 +1,25 @@
 public with sharing class AccountCasesController {
-
     @AuraEnabled
-    public static void findCasesBySubject(){
-
+    public static List<Case> findCasesBySubject(
+      String searchTerm,
+      string accountId
+    ) {
+      try {
+        // Construction de la chaîne avec les wildcards pour la recherche
+        String likeSearchTerm = '%' + searchTerm + '%';
+  
+        // Requête SOQL pour rechercher les cas correspondant
+        List<Case> cases = [
+          SELECT Subject, Status, Priority
+          FROM Case
+          WHERE Subject LIKE :likeSearchTerm AND accountid = :accountId
+        ];
+        return cases;
+      } catch (Exception e) {
+        // Lance une exception gérée pour que le LWC puisse comprendre l'erreur
+        throw new AuraHandledException(
+          'Erreur lors de la recherche des cas: ' + e.getMessage()
+        );
+      }
     }
-
-
-}
+  }
