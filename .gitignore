@@ -1,7 +1,0 @@
-.sfdx/
-/node_modules
-.prettierrc
-package-lock.json
-*.json
-.prettierignor
-.gitignore
