@@ -1,22 +1,20 @@
-import { LightningElement, api, wire, track } from "lwc";
-import getOpportunities from "@salesforce/apex/AccountOpportunitiesController.getOpportunities";
-import { refreshApex } from "@salesforce/apex";
+import { LightningElement, api, wire, track } from 'lwc';
+import getOpportunities from '@salesforce/apex/AccountOpportunitiesController.getOpportunities';
+import { refreshApex } from '@salesforce/apex';
 
-  const COLUMNS = [
-    { label: "Nom Opportunité", fieldName: "Name", type: "text" },
-    { label: "Montant", fieldName: "Amount", type: "currency" },
-    { label: "Date de Clôture", fieldName: "CloseDate", type: "date" },
-    { label: "Phase", fieldName: "StageName", type: "Picklist" },
-  ];
+const COLUMNS = [
+  { label: 'Nom Opportunité', fieldName: 'Name', type: 'text' },
+  { label: 'Montant', fieldName: 'Amount', type: 'currency' },
+  { label: 'Date de Clôture', fieldName: 'CloseDate', type: 'date' },
+  { label: 'Phase', fieldName: 'StageName', type: 'Picklist' },
+];
 export default class AccountOpportunitiesViewer extends LightningElement {
   @api recordId;
   @track opportunities;
   @track error = {};
   wiredOpportunitiesResult;
 
-
-
-  @wire(getOpportunities, { accountId: "$recordId" }) //error
+  @wire(getOpportunities, { accountId: '$recordId' }) //error
   wiredOpportunities(result) {
     this.wiredOpportunitiesResult = result; // Stocke le résultat
 
@@ -46,12 +44,12 @@ export default class AccountOpportunitiesViewer extends LightningElement {
           this.error = error; // Gérer les erreurs
           this.isLoading = false; // Arrête le chargement
         });
-    } else {      
+    } else {
       this.isLoading = false; // Assure-toi d'arrêter le chargement
     }
   }
 
-  get showTable() {   
+  get showTable() {
     return this.opportunities && this.opportunities.length > 0;
   }
 }

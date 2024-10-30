@@ -1,18 +1,18 @@
-import { LightningElement, track, api } from "lwc";
-import findCasesBySubject from "@salesforce/apex/AccountCasesController.findCasesBySubject";
-import AccountId from "@salesforce/schema/AccountHistory.AccountId";
+import { LightningElement, track, api } from 'lwc';
+import findCasesBySubject from '@salesforce/apex/AccountCasesController.findCasesBySubject';
+import AccountId from '@salesforce/schema/AccountHistory.AccountId';
 
 const COLUMNS = [
-  { label: "Sujet", fieldName: "Subject", type: "text" },
-  { label: "Statut", fieldName: "Status", type: "Picklist" },
-  { label: "Priorité", fieldName: "Priority", type: "Picklist" },
+  { label: 'Sujet', fieldName: 'Subject', type: 'text' },
+  { label: 'Statut', fieldName: 'Status', type: 'Picklist' },
+  { label: 'Priorité', fieldName: 'Priority', type: 'Picklist' },
 ];
 
 export default class AccountCaseSearchComponent extends LightningElement {
   @api recordId;
   @track cases;
   @track error;
-  searchTerm = "";
+  searchTerm = '';
   columns = COLUMNS;
 
   updateSearchTerm(event) {
@@ -26,10 +26,9 @@ export default class AccountCaseSearchComponent extends LightningElement {
         .then((result) => {
           this.cases = result; // Stocke les résultats
         })
-        .catch((error) => {
-        });
+        .catch((error) => {});
     } else {
-      console.log("Le terme de recherche est vide.");
+      console.log('Le terme de recherche est vide.');
       this.cases = null; // Réinitialise le tableau si le terme est vide
     }
 
@@ -48,7 +47,7 @@ export default class AccountCaseSearchComponent extends LightningElement {
       })
       .catch((error) => {
         this.error =
-          "Une erreur est survenue lors de la recherche des cases : " +
+          'Une erreur est survenue lors de la recherche des cases : ' +
           error.body.message;
       })
       .finally(() => {
@@ -56,7 +55,7 @@ export default class AccountCaseSearchComponent extends LightningElement {
       });
   }
 
-  get showTable() {    
+  get showTable() {
     return this.cases && this.cases.length > 0;
   }
 }
