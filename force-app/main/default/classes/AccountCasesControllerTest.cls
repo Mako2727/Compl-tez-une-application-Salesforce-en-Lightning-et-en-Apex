@@ -1,5 +1,5 @@
 @IsTest
-private class CasesSelectorTest {
+private class AccountCasesControllerTest {
   @TestSetup
   static void setup() {
     Account testAccount = TestDataFactory.createTestAccount();
@@ -7,7 +7,7 @@ private class CasesSelectorTest {
   }
 
   @IsTest
-  static void testGetCasesBySubjectAccountId() {
+  static void testFindCasesBySubject() {
     // Sélectionne le compte de test créé
     Account testAccount = [SELECT Id FROM Account LIMIT 1];
 
@@ -15,9 +15,9 @@ private class CasesSelectorTest {
     String likeSearchTerm = 'Test%';
 
     Test.startTest();
-    List<Case> results = CasesSelector.getCasesBySubjectAccountId(
-      testAccount.Id,
-      likeSearchTerm
+    List<Case> results = AccountCasesController.findCasesBySubject(
+      likeSearchTerm,
+      testAccount.Id
     );
     Test.stopTest();
     Assert.areNotEqual(0, results.size(), 'Should return at least one case');
