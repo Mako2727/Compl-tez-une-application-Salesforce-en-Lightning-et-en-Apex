@@ -7,25 +7,25 @@
       <lightning-button
         class="slds-m-bottom_small"
         label="Rafraîchir"
-        onclick="{handleRafraichir}"
+        onclick={handleRafraichir}
         variant="brand"
       ></lightning-button>
-      <template if:true="{isLoading}">
+      <template if:true={isLoading}>
         <lightning-spinner alternative-text="Chargement..."></lightning-spinner>
       </template>
-      <template if:true="{showTable}">
+      <template if:true={showTable}>
         <lightning-datatable
-          data="{opportunities}"
-          columns="{columns}"
+          data={opportunities}
+          columns={columns}
           key-field="Id"
         >
         </lightning-datatable>
       </template>
-      <template if:false="{showTable}">
+      <template if:false={showTable}>
         <p>Aucune opportunité à afficher.</p>
       </template>
-      <template if:true="{error}">
-        <template if:false="{isLoading}">
+      <template if:true={error}>
+        <template if:false={isLoading}>
           <div
             class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error"
             role="contentinfo"

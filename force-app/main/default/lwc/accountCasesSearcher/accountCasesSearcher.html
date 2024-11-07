@@ -3,25 +3,25 @@
     <div class="slds-p-around_medium">
       <lightning-input
         label="Rechercher par Sujet"
-        value="{searchTerm}"
-        onchange="{updateSearchTerm}"
+        value={searchTerm}
+        onchange={updateSearchTerm}
       >
       </lightning-input>
 
       <lightning-button
         label="Rechercher"
         variant="brand"
-        onclick="{handleSearch}"
+        onclick={handleSearch}
         class="slds-m-top_small"
       >
       </lightning-button>
     </div>
 
-    <template if:true="{cases}">
-      <lightning-datatable data="{cases}" columns="{columns}" key-field="Id">
+    <template if:true={cases}>
+      <lightning-datatable data={cases} columns={columns} key-field="Id">
       </lightning-datatable>
     </template>
-    <template if:true="{error}">
+    <template if:true={error}>
       <div
         class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error"
         role="contentinfo"
